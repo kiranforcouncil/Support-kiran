@@ -70,8 +70,21 @@
             }
 
             const recipients = "nagendra.siddapa@gmail.com,kagrahar@gmail.com";
-            const subject = "Support for Appointment of Mr. Kiran Agrahara to Robbinsville Town Council";
+          // const recipients = "MSeigfried@robbinsville.net,Council@robbinsville.net";
+
             
+            // Anti-Spam Optimization: Slight Subject Line Variation
+            const subjects = [
+                "Support for Appointment of Mr. Kiran Agrahara to Town Council",
+                "Appointing Mr. Kiran Agrahara to Robbinsville Town Council",
+                "Community Voice: Support for Kiran Agrahara's Appointment",
+                "Recommendation for Kiran Agrahara - Council Vacancy"
+            ];
+            const randomSubject = subjects[Math.floor(Math.random() * subjects.length)];
+            
+            // Generate a unique ID to make the email body unique (helps with Deliverability)
+            const uniqueId = Math.random().toString(36).substring(7).toUpperCase();
+
             const body = `Dear Honorable Council Members,
 
 I am writing to express my strong support for the appointment of Mr. Kiran Agrahara to fill the current vacancy on the Robbinsville Town Council. Mr. Agrahara's exceptional dedication to our community, combined with his unique and persistent efforts in seeking public office and civic engagement, make him a highly deserving candidate.
@@ -99,9 +112,11 @@ Thank you for considering this highly qualified individual for appointment.
 
 Sincerely,
 ${name}
-${address}`;
+${address}
 
-            const mailtoLink = `mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+Ref ID: ${uniqueId}`;
+
+            const mailtoLink = `mailto:${recipients}?subject=${encodeURIComponent(randomSubject)}&body=${encodeURIComponent(body)}`;
             
             window.location.href = mailtoLink;
         }
